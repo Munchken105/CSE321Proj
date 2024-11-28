@@ -1,2 +1,2 @@
-	<h1>Occupancy and Relay System</h1>
+<h1>Occupancy and Relay System</h1>
  
