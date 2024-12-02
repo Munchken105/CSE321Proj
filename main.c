@@ -54,17 +54,85 @@ void clearLCD(){
 
 void occupancyMachine(enum States state, enum Transition transition){
   switch (state){
+
     case IDLE:
       switch(transition){
         case noTrig:
+          Serial.print("Current State: Idle\n");
           break;
         case entTrig:
+          currentState = ENT_TRIG;
           break;
         case exitTrig:
-          break;
-        case bothTrig:
+          currentState = EXIT_TRIG;
           break;
       }
+    break;
+
+    case ENT_TRIG:
+      case noTrig:
+      break;
+      case entTrig:
+      break;
+      case exitTrig:
+      break;
+      case bothTrig:
+      break;
+    break;
+
+    case EXIT_TRIG:
+      case noTrig:
+      break;
+      case entTrig:
+      break;
+      case exitTrig:
+      break;
+      case bothTrig:
+      break;
+    break;
+
+    case PENDING_ENT:
+      case noTrig:
+      break;
+      case entTrig:
+      break;
+      case exitTrig:
+      break;
+      case bothTrig:
+      break;
+    break;
+
+    case PENDING_EXT:
+      case noTrig:
+      break;
+      case entTrig:
+      break;
+      case exitTrig:
+      break;
+      case bothTrig:
+      break;
+    break;
+
+    case COUNT_UP:
+      case noTrig:
+      break;
+      case entTrig:
+      break;
+      case exitTrig:
+      break;
+      case bothTrig:
+      break;
+    break;
+
+    case COUNT_DOWN:
+      case noTrig:
+      break;
+      case entTrig:
+      break;
+      case exitTrig:
+      break;
+      case bothTrig:
+      break;
     break;
   }
 }
