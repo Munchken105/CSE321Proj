@@ -59,6 +59,7 @@ void occupancyMachine(enum States state, enum Transition transition){
   switch (state){
 
     case IDLE:
+      previousState = ENT_TRIG;
       switch(transition){
         case noTrig:
           Serial.print("Current State: Idle\n");
@@ -76,7 +77,6 @@ void occupancyMachine(enum States state, enum Transition transition){
 
     case PENDING:
       switch(transition){
-
         case noTrig:
           currentState = PENDING;
           if (pendingCycle == 0){
@@ -118,18 +118,20 @@ void occupancyMachine(enum States state, enum Transition transition){
     break;
 
     case ENT_TRIG:
+      previousState = ENT_TRIG;
       switch(transition){
         case noTrig:
-          previousState = ENT_TRIG;
           currentState = PENDING;
           break;
         case entTrig:
+          currentState = ENT_TRIG;
           break;
         case exitTrig:
-          currentState = 
+          currentState = COUNT_UP;
           break;
         case bothTrig:
-        break;
+          currentState = COUNT_UP;
+          break;
       }
     break;
 
@@ -222,9 +224,9 @@ void loop() {
   float temp = ((analogRead(A0) * (5.0/1024))-0.5)/0.01;
   clearLCD();
 
+  //DEFINING Transitions
   DoorIn = digitalRead(9);
   DoorOut = digitalRead(8);
-  //DEFINING Transitions
   enum Transition currentTransition = defineTransition(DoorIn,DoorOut);
 
   occupancyMachine(currentState ,currentTransition);
@@ -233,6 +235,8 @@ void loop() {
   lcd.print("Count: ");
   lcd.print(count);
 
+
+  //"CLEARING SERIAL TERMINAL" (PUT IT IN AIR-QUOTE)
   for (int i = 0;  i < 200; i++){
     Serial.print(" \n");
   }
