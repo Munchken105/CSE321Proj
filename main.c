@@ -8,7 +8,8 @@ enum States{
   PENDING_ENT,
   PENDING_EXT,
   COUNT_UP,
-  COUNT_DOWN
+  COUNT_DOWN,
+  PENDING
 };
 
 enum Transition{
@@ -22,7 +23,9 @@ enum Transition{
 LiquidCrystal_I2C lcd(0x27,16,2);
 int count = 0;
 enum States currentState;
-int cycle = 500;
+enum States previousState;
+int clearCycle = 500;
+int pendingCycle = 200;
 int DoorIn = 0;
 int DoorOut = 0;
 
@@ -43,12 +46,12 @@ enum Transition defineTransition(int Entr, int Exit){
 }
 
 void clearLCD(){
-  if (cycle == 0){
+  if (clearCycle == 0){
     lcd.clear();
     Serial.print("Clearing LCD\n");
-    cycle = 500;
+    clearCycle = 500;
   }
-  cycle--;
+  clearCycle--;
 }
 
 
@@ -61,23 +64,59 @@ void occupancyMachine(enum States state, enum Transition transition){
           Serial.print("Current State: Idle\n");
           break;
         case entTrig:
+          previousState = IDLE;
           currentState = ENT_TRIG;
           break;
         case exitTrig:
+          previousState = IDLE;
           currentState = EXIT_TRIG;
           break;
       }
     break;
 
+    case PENDING:
+
+      if (transition == noTrig){
+        currentState = PENDING;
+        if (pendingCycle == 0){
+          currentState = IDLE;
+          pendingCycle = 200;
+        }
+        pendingCycle--;
+      }
+
+      else if (transition == bothTrig){
+        if (previousState == ENT_TRIG){
+          currentState = COUNT_DOWN;
+          pendingCycle = 200;
+
+        } else if (previousState == EXIT_TRIG){
+          currentState = COUNT_DOWN;
+          pendingCycle = 200;
+        } 
+      }
+      else if (transition = exitTrig){
+          currentState = COUNT_UP;
+          pendingCycle = 200;
+      }
+      else if (transition = entTrig){
+          currentState = COUNT_DOWN;
+          pendingCycle = 200;
+      }
+    break;
+
     case ENT_TRIG:
       case noTrig:
-      break;
+        previousState = ENT_TRIG;
+        currentState = PENDING;
+        break;
       case entTrig:
-      break;
+        break;
       case exitTrig:
-      break;
+        currentState = 
+        break;
       case bothTrig:
-      break;
+        break;
     break;
 
     case EXIT_TRIG:
