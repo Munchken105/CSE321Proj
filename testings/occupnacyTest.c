@@ -36,7 +36,7 @@ void occupancyMachine(enum States state, enum Transition transition){
   switch (state){
 
     case IDLE:
-      printf("Current State: IDLE");
+      printf("Current State: IDLE\n");
       previousState = ENT_TRIG;
       switch(transition){
         case noTrig:
@@ -54,7 +54,7 @@ void occupancyMachine(enum States state, enum Transition transition){
     break;
 
     case PENDING:
-      printf("Current State: PENDING");
+      printf("Current State: PENDING\n");
       switch(transition){
         case noTrig:
           currentState = PENDING;
@@ -97,7 +97,7 @@ void occupancyMachine(enum States state, enum Transition transition){
     break;
 
     case ENT_TRIG:
-      printf("Current State: ENT_TRIG");
+      printf("Current State: ENT_TRIG\n");
       previousState = ENT_TRIG;
       switch(transition){
         case noTrig:
@@ -116,7 +116,7 @@ void occupancyMachine(enum States state, enum Transition transition){
     break;
 
     case EXIT_TRIG:
-      printf("Current State: EXIT_TRIG");
+      printf("Current State: EXIT_TRIG\n");
       previousState = EXIT_TRIG;
       switch(transition){
         case noTrig:
@@ -135,7 +135,7 @@ void occupancyMachine(enum States state, enum Transition transition){
     break;
 
     case PENDING_ENT:
-      printf("Current State: PENDING_ENT");
+      printf("Current State: PENDING_ENT\n");
       previousState = PENDING_ENT;
       switch(transition){
         case exitTrig:
@@ -148,7 +148,7 @@ void occupancyMachine(enum States state, enum Transition transition){
     break;
 
     case PENDING_EXT:
-      printf("Current State: PENDING_EXT");
+      printf("Current State: PENDING_EXT\n");
       previousState = PENDING_EXT;
       switch(transition){
         case entTrig:
@@ -162,7 +162,7 @@ void occupancyMachine(enum States state, enum Transition transition){
     break;
 
     case COUNT_UP:
-      printf("Current State: COUNT_UP");
+      printf("Current State: COUNT_UP\n");
       previousState = COUNT_UP;
       switch(transition){
         case noTrig:
@@ -181,7 +181,7 @@ void occupancyMachine(enum States state, enum Transition transition){
     break;
 
     case COUNT_DOWN:
-      printf("Current State: COUNT_DOWN");
+      printf("Current State: COUNT_DOWN\n");
       previousState = COUNT_DOWN;
       switch(transition){
         case noTrig:
@@ -201,14 +201,13 @@ void occupancyMachine(enum States state, enum Transition transition){
   }
 }
 
+
 int main(int argc, char const *argv[])
 {
-    int testingCylce = 100;
-    while (testingCylce != 0){
-        printf("Cycle: %d\n", testingCylce);
+  int testingCylce = 0;
 
-        
-        testingCylce--;
-    }
-    return 0;
+  currentState = IDLE;
+  enum Transition transitions[] = {ENT_TRIG};
+  
+  return 0;
 }
