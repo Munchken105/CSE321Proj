@@ -97,7 +97,7 @@ void occupancyMachine(enum States state, enum Transition transition){
           if (previousState == ENT_TRIG){
             currentState = ENT_TRIG;
           } else if (previousState == EXIT_TRIG){
-            currentState = COUNT_UP;
+            currentState = COUNT_DOWN;
             pendingCycle = 200;
           }
         break;
@@ -106,7 +106,7 @@ void occupancyMachine(enum States state, enum Transition transition){
           if (previousState == EXIT_TRIG){
             currentState = EXIT_TRIG;
           } else if (previousState == ENT_TRIG){
-            currentState = COUNT_DOWN;
+            currentState = COUNT_UP;
             pendingCycle = 200;
           }
         break;

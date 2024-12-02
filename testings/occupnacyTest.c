@@ -69,7 +69,7 @@ void occupancyMachine(enum States state, enum Transition transition){
           if (previousState == ENT_TRIG){
             currentState = ENT_TRIG;
           } else if (previousState == EXIT_TRIG){
-            currentState = COUNT_UP;
+            currentState = COUNT_DOWN;
             pendingCycle = 200;
           }
         break;
@@ -78,7 +78,7 @@ void occupancyMachine(enum States state, enum Transition transition){
           if (previousState == EXIT_TRIG){
             currentState = EXIT_TRIG;
           } else if (previousState == ENT_TRIG){
-            currentState = COUNT_DOWN;
+            currentState = COUNT_UP;
             pendingCycle = 200;
           }
         break;
@@ -204,20 +204,33 @@ void occupancyMachine(enum States state, enum Transition transition){
 
 int main(int argc, char const *argv[])
 {
-  int testingCylce = 0;
-
+  count=0;
+  printf("---------------------------------------------\n");
   currentState = IDLE;
-  enum Transition transitions[] = {noTrig, entTrig, bothTrig, exitTrig, noTrig};
+  enum Transition transitions1[] = {noTrig, entTrig, bothTrig, exitTrig, noTrig};
   int testingcycles1 = 6;
   
   for (int i = 0; i < testingcycles1; i++){
-    occupancyMachine(currentState,transitions[i]);
+    occupancyMachine(currentState,transitions1[i]);
   }
 
   printf("ENDING TESTINGCYCLE1 WITH COUNT : %d\n",count);
-  printf("\n");
 
+  printf("---------------------------------------------\n");
+
+  count=0;
+  printf("---------------------------------------------\n");
+
+  currentState = IDLE;
+  enum Transition transitions2[] = {noTrig, entTrig, noTrig, noTrig, noTrig, exitTrig, noTrig};
+  int testingcycles2 = 10;
   
+  for (int i = 0; i < testingcycles2; i++){
+    occupancyMachine(currentState,transitions2[i]);
+  }
+
+  printf("ENDING TESTINGCYCLE2 WITH COUNT : %d\n",count);
+  printf("---------------------------------------------\n");
 
   return 0;
 }
