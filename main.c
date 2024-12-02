@@ -68,7 +68,7 @@ void occupancyMachine(enum States state, enum Transition transition){
       previousState = ENT_TRIG;
       switch(transition){
         case noTrig:
-          Serial.print("Current State: Idle\n");
+          currentState = IDLE;
           break;
         case entTrig:
           previousState = IDLE;

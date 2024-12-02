@@ -40,7 +40,7 @@ void occupancyMachine(enum States state, enum Transition transition){
       previousState = ENT_TRIG;
       switch(transition){
         case noTrig:
-          printf("Current State: Idle\n");
+          currentState = IDLE;
           break;
         case entTrig:
           previousState = IDLE;
@@ -207,7 +207,17 @@ int main(int argc, char const *argv[])
   int testingCylce = 0;
 
   currentState = IDLE;
-  enum Transition transitions[] = {ENT_TRIG};
+  enum Transition transitions[] = {noTrig, entTrig, bothTrig, exitTrig, noTrig};
+  int testingcycles1 = 6;
   
+  for (int i = 0; i < testingcycles1; i++){
+    occupancyMachine(currentState,transitions[i]);
+  }
+
+  printf("ENDING TESTINGCYCLE1 WITH COUNT : %d\n",count);
+  printf("\n");
+
+  
+
   return 0;
 }
