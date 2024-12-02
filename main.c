@@ -1,49 +1,77 @@
 #include <Wire.h>
 #include <LiquidCrystal_I2C.h>
 
+enum States{
+  IDLE,
+  ENT_TRIG,
+  EXIT_TRIG,
+  PENDING_ENT,
+  PENDING_EXT,
+  COUNT_UP,
+  COUNT_DOWN
+};
 
-//Define the States
-#define IDLE = 0; //zero sensor triggered
-#define ENT_TRIG = 1; //entrance sensor triggered
-#define EXIT_TRIG = 2; //exit sensor triggered
-#define PENDING_ENT = 3; //both sensor triggered, pending entrance
-#define PENDING_EXIT = 4; //both sensor triggered, pending exit
-#define COUNTUP = 5;
-#define COUNTDOWN = 6;
+enum Transition{
+  noTrig,
+  entTrig,
+  exitTrig,
+  bothTrig
+};
 
-//Define the Transition
-#define noTrig;
-#define entTrig;
-#define exitTrig;
-#define bothTrig;
-
-
+//defining varibles for the Arduino
 LiquidCrystal_I2C lcd(0x27,16,2);
 int count = 0;
-int currentState;
+enum States currentState;
 int cycle = 500;
-
 int DoorIn = 0;
 int DoorOut = 0;
 
-int defineTransition(int Entr, int Exit){
+
+enum Transition defineTransition(int Entr, int Exit){
   if (Entr == HIGH && Exit == HIGH){
-    return 0;
+    return noTrig;
   } else if (Entr == LOW && Exit == HIGH){
-    return 1;
+    return entTrig;
   } else if (Entr == HIGH && Exit == LOW){
-    return 2;
+    return exitTrig;
   } else if (Entr == LOW && Exit == LOW){
-    return 3;
+    return bothTrig;
   } else {
     Serial.print("Invalid Transition: Find Error");
-    return -1;
+    return NULL;
+  }
+}
+
+void clearLCD(){
+  if (cycle == 0){
+    lcd.clear();
+    Serial.print("Clearing LCD\n");
+    cycle = 500;
+  }
+  cycle--;
+}
+
+
+void occupancyMachine(enum States state, enum Transition transition){
+  switch (state){
+    case IDLE:
+      switch(transition){
+        case noTrig:
+          break;
+        case entTrig:
+          break;
+        case exitTrig:
+          break;
+        case bothTrig:
+          break;
+      }
+    break;
   }
 }
 
 void setup() {
   // put your setup code here, to run once:
-  currentState = 0;
+  currentState = IDLE;
   lcd.init();
   lcd.clear();
   lcd.backlight();
@@ -61,165 +89,16 @@ void loop() {
   // put your main code here, to run repeatedly:
   
   float temp = ((analogRead(A0) * (5.0/1024))-0.5)/0.01;
-  
-
-
-  if (cycle == 0){
-    lcd.clear();
-    Serial.print("Clearing LCD\n");
-    cycle = 500;
-  }
-
-  cycle--;
+  clearLCD();
 
   DoorIn = digitalRead(9);
   DoorOut = digitalRead(8);
   //DEFINING Transitions
-  int currentTransition = defineTransition(DoorIn,DoorOut);
+  enum Transition currentTransition = defineTransition(DoorIn,DoorOut);
 
-  //FSM
-  switch (currentState){
-    case 0:
-      switch (currentTransition){
-        case 0:
-          Serial.print("Current State: Idle\n");
-          break;
-        case 1:
-          Serial.print("Current Transition: Entrance Triggered\n");
-          currentState = 1;
-          break;
-        case 2:
-          Serial.print("Current Transition: Exit Triggered\n");
-          currentState = 2;
-          break;
-      }
-    break;
-    
-    case 1:
-      switch (currentTransition){
-        case 0:
-          Serial.print("Current State: Idle\n");
-          currentState = 0;
-          break;
-
-        case 1:
-          Serial.print("Someone Step on the Entrance Sensor\n");
-          currentState = 1;
-          break;
-
-        case 2:
-          currentState = 5;
-          break;
-
-        case 3:
-          Serial.print("Both Trigger Triggered from Entrance\n");
-          currentState = 3;
-          break;
-      }
-      break;
-
-      case 2:
-      switch (currentTransition){
-        case 0:
-          Serial.print("Current State: Idle\n");
-          currentState = 0;
-          break;
-
-        case 1:
-          currentState = 6;
-          break;
-
-        case 2:
-          Serial.print("Someone Step on the Exit Sensor\n");
-          currentState = 2;
-          break;
-
-        case 3:
-          Serial.print("Both Trigger Triggered from Exit\n");
-          currentState = 4;
-          break;
-      }
-      break;
-
-      case 3:
-        switch (currentTransition){
-        case 2:
-          currentState = 5;
-          break;
-
-        case 3:
-          Serial.print("Pending Entrance\n");
-          currentState = 3;
-          break;
-      }
-      break;
-
-      case 4:
-      switch (currentTransition){
-        case 1:
-          currentState = 6;
-          break;
-
-        case 3:
-          Serial.print("Pending Exit\n");
-          currentState = 4;
-          break;
-      }
-      break;
-
-      case 5:
-        switch (currentTransition){
-        case 0:
-          Serial.print("Completed Entrance\n");
-          count++;
-          currentState = 0;
-          break;
-
-        case 2:
-          Serial.print("Confirming Entrance\n");
-          currentState = 5;
-          break;
-
-        case 3:
-          Serial.print("Confirming Entrance\n");
-          currentState = 5;
-          break;
-      }
-      break;
-
-      case 6:
-        switch (currentTransition){
-        case 0:
-          Serial.print("Completed Exit\n");
-          if (count > 0){
-            count--;
-          }
-          currentState = 0;
-          break;
-
-        case 1:
-          Serial.print("Confirming Exit\n");
-          currentState = 6;
-          break;
-        
-        case 3:
-          Serial.print("Confirming Exit\n");
-          currentState = 6;
-          break;
-
-      }
-      break;
-  }
-
-
+  occupancyMachine(currentState ,currentTransition);
 
   lcd.setCursor(0,0);
   lcd.print("Count: ");
   lcd.print(count);
-
-
-
 }
-
-
-
