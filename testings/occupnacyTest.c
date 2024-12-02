@@ -1,5 +1,5 @@
-#include <Wire.h>
-#include <LiquidCrystal_I2C.h>
+#include <stdio.h>
+//for the sake of simplicity, FUNCTION and ATTRIBUTES copied from  main.c with Adjustments
 
 enum States{
   IDLE,
@@ -20,9 +20,6 @@ enum Transition{
 };
 
 //defining varibles for the Arduino
-LiquidCrystal_I2C lcd(0x27,16,2);
-
-
 int count = 0;
 
 enum States currentState;
@@ -35,40 +32,15 @@ int DoorIn = 0;
 int DoorOut = 0;
 
 
-enum Transition defineTransition(int Entr, int Exit){
-  if (Entr == HIGH && Exit == HIGH){
-    return noTrig;
-  } else if (Entr == LOW && Exit == HIGH){
-    return entTrig;
-  } else if (Entr == HIGH && Exit == LOW){
-    return exitTrig;
-  } else if (Entr == LOW && Exit == LOW){
-    return bothTrig;
-  } else {
-    Serial.print("Invalid Transition: Find Error");
-    return NULL;
-  }
-}
-
-void clearLCD(){
-  if (clearCycle == 0){
-    lcd.clear();
-    Serial.print("Clearing LCD\n");
-    clearCycle = 500;
-  }
-  clearCycle--;
-}
-
-
 void occupancyMachine(enum States state, enum Transition transition){
   switch (state){
 
     case IDLE:
-      Serial.print("Current State: IDLE");
+      printf("Current State: IDLE");
       previousState = ENT_TRIG;
       switch(transition){
         case noTrig:
-          Serial.print("Current State: Idle\n");
+          printf("Current State: Idle\n");
           break;
         case entTrig:
           previousState = IDLE;
@@ -82,7 +54,7 @@ void occupancyMachine(enum States state, enum Transition transition){
     break;
 
     case PENDING:
-      Serial.print("Current State: PENDING");
+      printf("Current State: PENDING");
       switch(transition){
         case noTrig:
           currentState = PENDING;
@@ -125,7 +97,7 @@ void occupancyMachine(enum States state, enum Transition transition){
     break;
 
     case ENT_TRIG:
-      Serial.print("Current State: ENT_TRIG");
+      printf("Current State: ENT_TRIG");
       previousState = ENT_TRIG;
       switch(transition){
         case noTrig:
@@ -144,7 +116,7 @@ void occupancyMachine(enum States state, enum Transition transition){
     break;
 
     case EXIT_TRIG:
-      Serial.print("Current State: EXIT_TRIG");
+      printf("Current State: EXIT_TRIG");
       previousState = EXIT_TRIG;
       switch(transition){
         case noTrig:
@@ -163,7 +135,7 @@ void occupancyMachine(enum States state, enum Transition transition){
     break;
 
     case PENDING_ENT:
-      Serial.print("Current State: PENDING_ENT");
+      printf("Current State: PENDING_ENT");
       previousState = PENDING_ENT;
       switch(transition){
         case exitTrig:
@@ -176,7 +148,7 @@ void occupancyMachine(enum States state, enum Transition transition){
     break;
 
     case PENDING_EXT:
-      Serial.print("Current State: PENDING_EXT");
+      printf("Current State: PENDING_EXT");
       previousState = PENDING_EXT;
       switch(transition){
         case entTrig:
@@ -190,7 +162,7 @@ void occupancyMachine(enum States state, enum Transition transition){
     break;
 
     case COUNT_UP:
-      Serial.print("Current State: COUNT_UP");
+      printf("Current State: COUNT_UP");
       previousState = COUNT_UP;
       switch(transition){
         case noTrig:
@@ -209,7 +181,7 @@ void occupancyMachine(enum States state, enum Transition transition){
     break;
 
     case COUNT_DOWN:
-      Serial.print("Current State: COUNT_DOWN");
+      printf("Current State: COUNT_DOWN");
       previousState = COUNT_DOWN;
       switch(transition){
         case noTrig:
@@ -229,42 +201,14 @@ void occupancyMachine(enum States state, enum Transition transition){
   }
 }
 
-void setup() {
-  // put your setup code here, to run once:
-  currentState = IDLE;
-  lcd.init();
-  lcd.clear();
-  lcd.backlight();
+int main(int argc, char const *argv[])
+{
+    int testingCylce = 100;
+    while (testingCylce != 0){
+        printf("Cycle: %d\n", testingCylce);
 
-  analogReference(DEFAULT);
-  pinMode(A0,INPUT);
-
-  pinMode(9,INPUT);
-  pinMode(8,INPUT);
-
-  Serial.begin(9600);
-}
-
-void loop() {
-  // put your main code here, to run repeatedly:
-  
-  float temp = ((analogRead(A0) * (5.0/1024))-0.5)/0.01;
-  clearLCD();
-
-  //DEFINING Transitions
-  DoorIn = digitalRead(9);
-  DoorOut = digitalRead(8);
-  enum Transition currentTransition = defineTransition(DoorIn,DoorOut);
-
-  occupancyMachine(currentState ,currentTransition);
-
-  lcd.setCursor(0,0);
-  lcd.print("Count: ");
-  lcd.print(count);
-
-
-  //"CLEARING SERIAL TERMINAL" (PUT IT IN AIR-QUOTE)
-  for (int i = 0;  i < 200; i++){
-    Serial.print(" \n");
-  }
+        
+        testingCylce--;
+    }
+    return 0;
 }
