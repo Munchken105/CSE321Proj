@@ -75,103 +75,127 @@ void occupancyMachine(enum States state, enum Transition transition){
     break;
 
     case PENDING:
+      switch(transition){
 
-      if (transition == noTrig){
-        currentState = PENDING;
-        if (pendingCycle == 0){
-          currentState = IDLE;
-          pendingCycle = 200;
-        }
-        pendingCycle--;
-      }
+        case noTrig:
+          currentState = PENDING;
+          if (pendingCycle == 0){
+            currentState = IDLE;
+            pendingCycle = 200;
+          }
+          pendingCycle--;
+        break;
 
-      else if (transition == bothTrig){
-        if (previousState == ENT_TRIG){
-          currentState = COUNT_DOWN;
-          pendingCycle = 200;
+        case entTrig:
+          if (previousState == ENT_TRIG){
+            currentState = ENT_TRIG;
+          } else if (previousState == EXIT_TRIG){
+            currentState = COUNT_UP;
+            pendingCycle = 200;
+          }
+        break;
 
-        } else if (previousState == EXIT_TRIG){
-          currentState = COUNT_DOWN;
-          pendingCycle = 200;
-        } 
-      }
-      else if (transition = exitTrig){
-          currentState = COUNT_UP;
-          pendingCycle = 200;
-      }
-      else if (transition = entTrig){
-          currentState = COUNT_DOWN;
-          pendingCycle = 200;
+        case exitTrig:
+          if (previousState == EXIT_TRIG){
+            currentState = EXIT_TRIG;
+          } else if (previousState == ENT_TRIG){
+            currentState = COUNT_DOWN;
+            pendingCycle = 200;
+          }
+        break;
+
+        case bothTrig:
+          if (previousState == EXIT_TRIG){
+            currentState = COUNT_UP;
+            pendingCycle = 200;
+          }
+          else if (previousState == ENT_TRIG){
+            currentState = COUNT_DOWN;
+            pendingCycle = 200;
+          }
+        break;
       }
     break;
 
     case ENT_TRIG:
-      case noTrig:
-        previousState = ENT_TRIG;
-        currentState = PENDING;
+      switch(transition){
+        case noTrig:
+          previousState = ENT_TRIG;
+          currentState = PENDING;
+          break;
+        case entTrig:
+          break;
+        case exitTrig:
+          currentState = 
+          break;
+        case bothTrig:
         break;
-      case entTrig:
-        break;
-      case exitTrig:
-        currentState = 
-        break;
-      case bothTrig:
-        break;
+      }
     break;
 
     case EXIT_TRIG:
-      case noTrig:
-      break;
-      case entTrig:
-      break;
-      case exitTrig:
-      break;
-      case bothTrig:
-      break;
+      switch(transition){
+        case noTrig:
+        break;
+        case entTrig:
+        break;
+        case exitTrig:
+        break;
+        case bothTrig:
+        break;
+      }
     break;
 
     case PENDING_ENT:
-      case noTrig:
-      break;
-      case entTrig:
-      break;
-      case exitTrig:
-      break;
-      case bothTrig:
-      break;
+      switch(transition){
+        case noTrig:
+        break;
+        case entTrig:
+        break;
+        case exitTrig:
+        break;
+        case bothTrig:
+        break;
+      }
     break;
 
     case PENDING_EXT:
-      case noTrig:
-      break;
-      case entTrig:
-      break;
-      case exitTrig:
-      break;
-      case bothTrig:
-      break;
+      switch(transition){
+        case noTrig:
+        break;
+        case entTrig:
+        break;
+        case exitTrig:
+        break;
+        case bothTrig:
+        break;
+      }
     break;
 
     case COUNT_UP:
-      case noTrig:
-      break;
-      case entTrig:
-      break;
-      case exitTrig:
-      break;
-      case bothTrig:
-      break;
+      switch(transition){
+        case noTrig:
+        break;
+        case entTrig:
+        break;
+        case exitTrig:
+        break;
+        case bothTrig:
+        break;
+      }
     break;
 
     case COUNT_DOWN:
-      case noTrig:
-      break;
-      case entTrig:
-      break;
-      case exitTrig:
-      break;
-      case bothTrig:
-      break;
+      switch(transition){
+        case noTrig:
+        break;
+        case entTrig:
+        break;
+        case exitTrig:
+        break;
+        case bothTrig:
+        break;
+      }
     break;
   }
 }
@@ -208,4 +232,8 @@ void loop() {
   lcd.setCursor(0,0);
   lcd.print("Count: ");
   lcd.print(count);
+
+  for (int i = 0;  i < 200; i++){
+    Serial.print(" \n");
+  }
 }
