@@ -209,7 +209,7 @@ void occupancyMachine(enum States state, enum Transition transition){
           break;
 
         case bothTrig:
-          currentState = 5;
+          currentState = COUNT_UP;
           break;
       }
     break;
