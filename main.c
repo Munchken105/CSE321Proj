@@ -149,7 +149,7 @@ void occupancyMachine(enum States state, enum Transition transition){
       previousState = EXIT_TRIG;
       switch(transition){
         case noTrig:
-          currentState = IDLE;
+          currentState = PENDING;
           break;
         case entTrig:
           currentState = COUNT_DOWN;
