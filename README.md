@@ -25,11 +25,15 @@ Power and Ground:
  
 
 <h3>Assembly</h3>
-Position two IR sensors and set them up on the door
+Position the two IR sensors and set them up on the door
+Sensor 1(connected to pin 9) being Entrace and Sensor 2 (connected to pin 8) being the exit
+
 
 <h3>Software Setup</h3>
 Clone the repository to your machine 
 Open the main.c file in your editor
+Open main.c in Aurdino Ide and make sure you have the LiquidCrystal_I2C library installed.
+(it can be installed by: Go to Sketch > Include Library > Manage Libraries and search and install for LiquidCrystal_I2C )
 
 <h3>Schematics</h3>
 
