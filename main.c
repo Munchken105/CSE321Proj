@@ -66,7 +66,6 @@ void occupancyMachine(enum States state, enum Transition transition){
 
     case IDLE:
       Serial.print("Current State: IDLE\n");
-      previousState = ENT_TRIG;
       switch(transition){
         case noTrig:
           currentState = IDLE;
@@ -127,18 +126,20 @@ void occupancyMachine(enum States state, enum Transition transition){
 
     case ENT_TRIG:
       Serial.print("Current State: ENT_TRIG\n");
-      previousState = ENT_TRIG;
       switch(transition){
         case noTrig:
+          previousState = ENT_TRIG;
           currentState = PENDING;
           break;
         case entTrig:
           currentState = ENT_TRIG;
           break;
         case exitTrig:
+          previousState = ENT_TRIG;
           currentState = COUNT_UP;
           break;
         case bothTrig:
+          previousState = ENT_TRIG;
           currentState = PENDING_ENT;
           break;
       }
@@ -146,18 +147,21 @@ void occupancyMachine(enum States state, enum Transition transition){
 
     case EXIT_TRIG:
       Serial.print("Current State: EXIT_TRIG\n");
-      previousState = EXIT_TRIG;
       switch(transition){
         case noTrig:
+          previousState = EXIT_TRIG;
           currentState = PENDING;
           break;
         case entTrig:
+          previousState = EXIT_TRIG;
           currentState = COUNT_DOWN;
           break;
         case exitTrig:
+          previousState = EXIT_TRIG;
           currentState = EXIT_TRIG;
           break;
         case bothTrig:
+          previousState = EXIT_TRIG;
           currentState = PENDING_EXT;
           break;
       }
@@ -165,12 +169,13 @@ void occupancyMachine(enum States state, enum Transition transition){
 
     case PENDING_ENT:
       Serial.print("Current State: PENDING_ENT\n");
-      previousState = PENDING_ENT;
       switch(transition){
         case noTrig:
+          previousState = PENDING_ENT;
           currentState = COUNT_UP;
           break;
         case exitTrig:
+          previousState = PENDING_ENT;
           currentState = COUNT_UP;
           break;
         case bothTrig:
@@ -181,12 +186,13 @@ void occupancyMachine(enum States state, enum Transition transition){
 
     case PENDING_EXT:
       Serial.print("Current State: PENDING_EXT\n");
-      previousState = PENDING_EXT;
       switch(transition){
         case noTrig:
+          previousState = PENDING_EXT;
           currentState = COUNT_DOWN;
           break;
         case entTrig:
+          previousState = PENDING_EXT;
           currentState = COUNT_DOWN;
           break;
 
@@ -198,11 +204,11 @@ void occupancyMachine(enum States state, enum Transition transition){
 
     case COUNT_UP:
       Serial.print("Current State: COUNT_UP\n");
-      previousState = COUNT_UP;
       switch(transition){
         case noTrig:
           count++;
           currentState = IDLE;
+          previousState = COUNT_UP;
           break;
 
         case exitTrig:
@@ -217,12 +223,12 @@ void occupancyMachine(enum States state, enum Transition transition){
 
     case COUNT_DOWN:
       Serial.print("Current State: COUNT_DOWN\n");
-      previousState = COUNT_DOWN;
       switch(transition){
         case noTrig:
           if (count > 0){
             count--;
           } currentState = IDLE;
+          previousState = COUNT_DOWN;
           break;
         case entTrig:
           currentState = COUNT_DOWN;
