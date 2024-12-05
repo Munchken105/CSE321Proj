@@ -59,8 +59,6 @@ Follow these steps to assemble the system components:
       <li>Senor 1 being the entrace connected to <code>pin 9</code> Sensor 2 being the exit connected to <code>pin 8</code> </li>
       <li>Ensure they are aligned correctly to detect motion effectively:
         <ul>
-          <li><strong>Sensor 1 (Entrance):</strong> Connect the signal pin to <code>pin 9</code> on the Arduino.</li>
-          <li><strong>Sensor 2 (Exit):</strong> Connect the signal pin to <code>pin 8</code> on the Arduino.</li>
         </ul>
       </li>
       <li>Secure the sensors in place so they do not move or shift during use.</li>
