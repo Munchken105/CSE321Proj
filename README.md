@@ -12,7 +12,7 @@ Temperature sensor<br>
 
 <h3>Hardware Setup</h3>
 IR Sensors:<br>
- >Sensor 1 (Entrace): Connect it to pin 9 <br>
+ > Sensor 1 (Entrace): Connect it to pin 9 <br>
  Sensor 2 (Exit): Connect it to pin 8 <br>
 LCD Display:<br>
  Connect the LCD to the Arduino's I2c pins (SDA and SCL)<br>
