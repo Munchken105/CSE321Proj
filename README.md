@@ -126,5 +126,5 @@ Once all components are connected and secured, verify the wiring to ensure every
 
 <h3>Schematics</h3>
 <p>
-Refer to the wiring diagram provided in the repository for detailed schematics.
+
 </p>
