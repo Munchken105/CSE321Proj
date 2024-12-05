@@ -26,6 +26,7 @@ This is a C-based embedded system utilizing two IR sensors connected to an Ardui
       <li>Go to <strong>Sketch > Include Library > Manage Libraries</strong>.</li>
       <li>Search for and install <code>LiquidCrystal_I2C</code>.</li>
     </ul>
+    <li> Upload the code to your Aurdino </li>
   </li>
 </ol>
 
