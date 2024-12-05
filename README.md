@@ -1,3 +1,7 @@
+##Introduction
+This project is an Arduino-based project that uses IR sensors to detect room entry and exit calculates the occupany count and displays it omn an LCD<br>
+as well as having a system that monitors temparture using a sensor and intergating a relay to control external devices based on room's occupancy.
+
 <h1>Occupancy and Relay System</h1>
  
 <h2>How to Set Up the System</h2>
@@ -22,12 +26,9 @@ Power and Ground:<br>
  Ensure all compnents are connected to ground<br>
  Power the Arduino and Sensors<br>
 
- 
-
 <h3>Assembly</h3>
 Position the two IR sensors and set them up on the door<br>
 Sensor 1(connected to pin 9) being Entrace and Sensor 2 (connected to pin 8) being the exit
-
 
 <h3>Software Setup</h3>
 Clone the repository to your machine<br> 
