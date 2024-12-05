@@ -53,6 +53,28 @@ Sensor 1 (connected to pin 9) is the entrance sensor, and Sensor 2 (connected to
   </li>
 </ol>
 
+<h3>How It Works</h3>
+<ul>
+  <li><strong>Occupancy Tracking:</strong>
+    <ul>
+      <li>Sensors detect entry (<code>pin 9</code>) and exit (<code>pin 8</code>) motions.</li>
+      <li>A finite state machine updates the occupancy count based on the detected transitions.</li>
+    </ul>
+  </li>
+  <li><strong>Temperature Monitoring:</strong>
+    <ul>
+      <li>Reads analog input from the temperature sensor.</li>
+      <li>Displays temperature on the LCD.</li>
+    </ul>
+  </li>
+  <li><strong>LCD Display:</strong>
+    <ul>
+      <li>Continuously updates with the current occupancy count and temperature.</li>
+    </ul>
+  </li>
+</ul>
+
+
 <h3>Schematics</h3>
 <p>
 Refer to the wiring diagram provided in the repository for detailed schematics.
