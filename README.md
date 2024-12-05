@@ -126,5 +126,5 @@ Once all components are connected and secured, verify the wiring to ensure every
 
 <h3>Schematics</h3>
 <p>
-
+Example Schematic: <img src="Example Schematic.png" alt="Example Schematic">
 </p>
