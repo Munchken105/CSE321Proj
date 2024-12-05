@@ -11,7 +11,7 @@ LCD()
 Temperature sensor
 
 <h3>Hardware Setup</h3>
-IR Sensors:  
+IR Sensors:<br>
  Sensor 1 (Entrace): Connect it to pin 9
  Sensor 2 (Exit): Connect it to pin 8
 LCD Display:
