@@ -31,6 +31,7 @@ enum States previousState;
 int clearCycle = 50;
 int pendingCycle = 25;
 int readCycle = 100;
+
 int DoorIn = 0;
 int DoorOut = 0;
 
