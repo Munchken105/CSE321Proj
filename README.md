@@ -30,10 +30,10 @@ Sensor 1(connected to pin 9) being Entrace and Sensor 2 (connected to pin 8) bei
 
 
 <h3>Software Setup</h3>
-Clone the repository to your machine 
-Open the main.c file in your editor
-Open main.c in Aurdino Ide and make sure you have the LiquidCrystal_I2C library installed.
-(it can be installed by: Go to Sketch > Include Library > Manage Libraries and search and install for LiquidCrystal_I2C )
+Clone the repository to your machine<br> 
+Open the main.c file in your editor<br>
+Open main.c in Aurdino Ide and make sure you have the LiquidCrystal_I2C library installed.<br>
+(it can be installed by: Go to Sketch > Include Library > Manage Libraries and search and install for LiquidCrystal_I2C)<br>
 
 <h3>Schematics</h3>
 
