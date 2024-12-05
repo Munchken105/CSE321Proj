@@ -56,7 +56,7 @@ Follow these steps to assemble the system components:
   <li><strong>IR Sensors:</strong>
     <ul>
       <li>Position the two IR sensors at the entrance of the room.</li>
-      <li>Senor 1 being the entrace connected to <code> pin 9 </code> Sensor 2 being the exit connected to <code>pin 8</code> </li>
+      <li>Senor 1 being the entrace connected to <code>pin 9</code> Sensor 2 being the exit connected to <code>pin 8</code> </li>
       <li>Ensure they are aligned correctly to detect motion effectively:
         <ul>
           <li><strong>Sensor 1 (Entrance):</strong> Connect the signal pin to <code>pin 9</code> on the Arduino.</li>
