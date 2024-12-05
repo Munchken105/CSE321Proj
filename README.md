@@ -16,6 +16,19 @@ This is a C-based embedded system utilizing two IR sensors connected to an Ardui
   <li>Temperature sensor</li>
 </ul>
 
+<h3>Software Setup</h3>
+<ol>
+  <li>Clone the repository to your machine.</li>
+  <li>Open the <code>main.c</code> file in your editor.</li>
+  <li>Open <code>main.c</code> in Arduino IDE and make sure you have the <code>LiquidCrystal_I2C</code> library installed.</li>
+  <li>To install the library:
+    <ul>
+      <li>Go to <strong>Sketch > Include Library > Manage Libraries</strong>.</li>
+      <li>Search for and install <code>LiquidCrystal_I2C</code>.</li>
+    </ul>
+  </li>
+</ol>
+
 <h3>Hardware Setup</h3>
 <ul>
   <li><strong>IR Sensors:</strong>
@@ -36,22 +49,58 @@ This is a C-based embedded system utilizing two IR sensors connected to an Ardui
 
 <h3>Assembly</h3>
 <p>
-Position the two IR sensors and set them up on the door.<br>
-Sensor 1 (connected to pin 9) is the entrance sensor, and Sensor 2 (connected to pin 8) is the exit sensor.
+Follow these steps to assemble the system components:
 </p>
 
-<h3>Software Setup</h3>
 <ol>
-  <li>Clone the repository to your machine.</li>
-  <li>Open the <code>main.c</code> file in your editor.</li>
-  <li>Open <code>main.c</code> in Arduino IDE and make sure you have the <code>LiquidCrystal_I2C</code> library installed.</li>
-  <li>To install the library:
+  <li><strong>IR Sensors:</strong>
     <ul>
-      <li>Go to <strong>Sketch > Include Library > Manage Libraries</strong>.</li>
-      <li>Search for and install <code>LiquidCrystal_I2C</code>.</li>
+      <li>Position the two IR sensors at the entrance of the room.</li>
+      <li>Ensure they are aligned correctly to detect motion effectively:
+        <ul>
+          <li><strong>Sensor 1 (Entrance):</strong> Connect the signal pin to <code>pin 9</code> on the Arduino.</li>
+          <li><strong>Sensor 2 (Exit):</strong> Connect the signal pin to <code>pin 8</code> on the Arduino.</li>
+        </ul>
+      </li>
+      <li>Secure the sensors in place so they do not move or shift during use.</li>
+    </ul>
+  </li>
+  <li><strong>LCD Display:</strong>
+    <ul>
+      <li>Connect the LCD to the Arduino's I2C pins:
+        <ul>
+          <li><strong>SDA:</strong> Connect to the Arduino's SDA pin.</li>
+          <li><strong>SCL:</strong> Connect to the Arduino's SCL pin.</li>
+        </ul>
+      </li>
+      <li>Secure the LCD where it can be easily viewed.</li>
+    </ul>
+  </li>
+  <li><strong>Temperature Sensor:</strong>
+    <ul>
+      <li>Place the temperature sensor in the desired location to monitor room temperature.</li>
+      <li>Connect the signal pin of the sensor to <code>A0</code> on the Arduino.</li>
+    </ul>
+  </li>
+  <li><strong>Power and Ground:</strong>
+    <ul>
+      <li>Connect all components to a common ground pin on the Arduino.</li>
+      <li>Power the system using a battery or a USB connection to the Arduino.</li>
+    </ul>
+  </li>
+  <li><strong>Relay (Optional):</strong>
+    <ul>
+      <li>If using a relay, connect it to a designated pin on the Arduino for control.</li>
+      <li>Connect the relay to the external device (e.g., lights or fans) as per the relay's specifications.</li>
     </ul>
   </li>
 </ol>
+<p>
+Once all components are connected and secured, verify the wiring to ensure everything is in the correct place before powering on the Arduino.
+</p>
+
+
+
 
 <h3>How It Works</h3>
 <ul>
