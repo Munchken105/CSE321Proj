@@ -3,24 +3,22 @@
 This is a C-based embedded system utilizing two IR sensors connected to an Arduino to determine the room occupancy. The system tracks the people entering and exiting the room by maintaining a count and displaying the data on an LCD. Temperature readings are also monitored using a temperature sensor.
 </p>
 
-<h2>How to Set Up the System</h2>
-
-<h3>Hardware Requirements</h3>
+<h2>Hardware Requirements</h2>
 <ul>
   <li>Arduino Uno</li>
   <li>Two IR sensors</li>
-  <li>Relay</li>
   <li>Wires</li>
   <li>Battery/Power Source</li>
   <li>LCD</li>
   <li>Temperature sensor</li>
 </ul>
 
+<h2>How to Set Up the System</h2>
 <h3>Software Setup</h3>
 <ol>
   <li>Clone the repository to your machine.</li>
-  <li>Open the <code>main.c</code> file in your editor.</li>
-  <li>Open <code>main.c</code> in Arduino IDE and make sure you have the <code>LiquidCrystal_I2C</code> library installed.</li>
+  <li>Open the <code>main.c</code> file in your editor and change it to a .ino file.</li>
+  <li>Open <code>main.ino</code> in Arduino IDE and make sure you have the <code>LiquidCrystal_I2C</code> library installed.</li>
   <li>To install the library:
     <ul>
       <li>Go to <strong>Sketch > Include Library > Manage Libraries</strong>.</li>
@@ -48,7 +46,7 @@ This is a C-based embedded system utilizing two IR sensors connected to an Ardui
   </li>
 </ul>
 
-<h3>Assembly</h3>
+<h2>Assembly</h2>
 <p>
 Follow these steps to assemble the system components:
 </p>
@@ -102,7 +100,7 @@ Once all components are connected and secured, verify the wiring to ensure every
 
 
 
-<h3>How It Works</h3>
+<h2>How It Works</h2>
 <ul>
   <li><strong>Occupancy Tracking:</strong>
     <ul>
@@ -124,7 +122,7 @@ Once all components are connected and secured, verify the wiring to ensure every
 </ul>
 
 
-<h3>Schematics</h3>
+<h2>Schematics</h2>
 <p>
-Example Schematic: <img src="Example Schematic.png" alt="Example Schematic">
+<img src="Schematic.png" alt="Schematic">
 </p>
