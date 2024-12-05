@@ -5,13 +5,13 @@ This project is an Arduino-based project that uses IR sensors to detect room ent
  
 <h2>How to Set Up the System</h2>
 <h3>Hardware Requirements</h3>
-Aurdino Uno
-Two IR sensors
-Relay
-Wires
-Battery/Power Source
-LCD()
-Temperature sensor
+Aurdino Uno<br>
+Two IR sensors<br>
+Relay<br>
+Wires<br>
+Battery/Power Source<br>
+LCD()<br>
+Temperature sensor<br>
 
 <h3>Hardware Setup</h3>
 IR Sensors:<br>
@@ -34,6 +34,7 @@ Clone the repository to your machine<br>
 Open the main.c file in your editor<br>
 Open main.c in Aurdino Ide and make sure you have the LiquidCrystal_I2C library installed.<br>
 (it can be installed by: Go to Sketch > Include Library > Manage Libraries and search and install for LiquidCrystal_I2C)<br>
+
 
 <h3>Schematics</h3>
 
