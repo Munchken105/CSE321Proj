@@ -88,7 +88,7 @@ Follow these steps to assemble the system components:
       <li>Power the system using a battery or a USB connection to the Arduino.</li>
     </ul>
   </li>
-  <li><strong>Relay (Optional):</strong>
+  <li><strong>Relay:</strong>
     <ul>
       <li>If using a relay, connect it to a designated pin on the Arduino for control.</li>
       <li>Connect the relay to the external device (e.g., lights or fans) as per the relay's specifications.</li>
